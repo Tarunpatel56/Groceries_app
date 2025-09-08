@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -19,10 +18,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailcontroller = TextEditingController();
+  final TextEditingController passwordcontroller = TextEditingController();
   bool isChecked = false;
-  
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-      final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  final formKey = GlobalKey<FormState>();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,132 +50,157 @@ class _LoginPageState extends State<LoginPage> {
 
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    SizedBox(height: 20),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text("Email"),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hint: Text("example@gmail.com"),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text("Email"),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text("Password"),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hint: Text("password"),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              isChecked = value!;
-                            });
-                          },
+                      TextFormField(
+                        controller: emailcontroller,
+                        validator: (value) {
+                          if (value!.contains("@gmail.com") == false) {
+                            return "please enter valid email";
+                          }
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hint: Text("example@gmail.com"),
                         ),
+                      ),
+                      SizedBox(height: 10),
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text("Password"),
+                      ),
+                      TextFormField(
+                        controller: passwordcontroller,
 
-                        Text("Remember Me", style: TextStyle(fontSize: 18)),
-                        Spacer(),
-
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ForgetPage(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              "Forget Password!",
-                              style: TextStyle(color: Colors.red, fontSize: 18),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 40,),
-                    SizedBox(
-                      width: 380,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          shape: BeveledRectangleBorder(
-                            borderRadius: BorderRadiusGeometry.circular(5),
-                          ),
-                        ),
-                        child: Text(
-                          "Log In",
-                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        validator: (value) {
+                          if (value!.length > 8 == false) {
+                            return "please enter valid password";
+                          }
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hint: Text("password"),
                         ),
                       ),
-                    ),SizedBox(height: 10,),
-                    RichText(
-                      text: TextSpan(
-                        text: "Don't have an account?",
-                        style: TextStyle(color: Colors.black),
+                      Row(
                         children: [
-                          TextSpan(
-                            text: " SIGN UP",
-                            style: TextStyle(color: Colors.red),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
+                          Checkbox(
+                            value: isChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isChecked = value!;
+                              });
+                            },
+                          ),
+
+                          Text("Remember Me", style: TextStyle(fontSize: 18)),
+                          Spacer(),
+
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: TextButton(
+                              onPressed: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => SignPage(),
+                                    builder: (context) => ForgetPage(),
                                   ),
                                 );
                               },
+                              child: Text(
+                                "Forget Password!",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                    Text("OR"),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(onTap: () { googleLogin(context);} ,
-                          child: Container(
-                            height: 65,
-                            width: 65,
-                            child: Image.asset("assets/21.webp"),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BottemBar(),
-                              ),
-                            );
+                      SizedBox(height: 40),
+                      SizedBox(
+                        width: 380,
+                        height: 50,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (formKey.currentState!.validate() == true) ;
                           },
-                          child: Container(
-                            height: 50,
-                            width: 50,
-                            child: Image.asset("assets/logo.webp"),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            shape: BeveledRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(5),
+                            ),
+                          ),
+                          child: Text(
+                            "Log In",
+                            style: TextStyle(color: Colors.white, fontSize: 25),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      SizedBox(height: 10),
+                      RichText(
+                        text: TextSpan(
+                          text: "Don't have an account?",
+                          style: TextStyle(color: Colors.black),
+                          children: [
+                            TextSpan(
+                              text: " SIGN UP",
+                              style: TextStyle(color: Colors.red),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SignPage(),
+                                    ),
+                                  );
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text("OR"),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              googleLogin(context);
+                            },
+                            child: Container(
+                              height: 65,
+                              width: 65,
+                              child: Image.asset("assets/21.webp"),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BottemBar(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Image.asset("assets/logo.webp"),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -183,74 +210,74 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
- googleLogin(context) async {
-    const List<String> scopes = <String>[
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ];
-    final GoogleSignIn signIn = GoogleSignIn.instance;
 
-    await signIn.initialize(
-      serverClientId:
-          "391545280397-tmb5lqeah6edkvo64llhg2m7pbpcu3ub.apps.googleusercontent.com",
-    );
-    final GoogleSignInAccount? user = await signIn.authenticate(
-      scopeHint: scopes,
-    );
+googleLogin(context) async {
+  const List<String> scopes = <String>[
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ];
+  final GoogleSignIn signIn = GoogleSignIn.instance;
 
-    print("==========================");
+  await signIn.initialize(
+    serverClientId:
+        "391545280397-tmb5lqeah6edkvo64llhg2m7pbpcu3ub.apps.googleusercontent.com",
+  );
+  final GoogleSignInAccount? user = await signIn.authenticate(
+    scopeHint: scopes,
+  );
 
-    print(user?.displayName);
-    print(user?.photoUrl);
-    print(user?.email);
+  print("==========================");
 
-    if (user == null) return;
-    await saveDetailsOnDB(user.id, {
+  print(user?.displayName);
+  print(user?.photoUrl);
+  print(user?.email);
+
+  if (user == null) return;
+  await saveDetailsOnDB(user.id, {
+    "socialId": user.id,
+    "name": user.displayName,
+    "email": user.email,
+    "image": user.photoUrl,
+  });
+
+  await SPref().saveUserData(
+    UserModel.fromJson({
       "socialId": user.id,
       "name": user.displayName,
       "email": user.email,
       "image": user.photoUrl,
-    });
+    }),
+  );
 
-    await SPref().saveUserData(
-      UserModel.fromJson({
-        "socialId": user.id,
-        "name": user.displayName,
-        "email": user.email,
-        "image": user.photoUrl,
-      }),
-    );
+  _navigateToLogin(context);
+}
 
-    _navigateToLogin(context);
+Future<void> saveDetailsOnDB(
+  String socialId,
+  Map<String, dynamic> userData,
+) async {
+  var _firebaseFirestore;
+  final CollectionReference userCollection = _firebaseFirestore.collection(
+    "users",
+  );
+
+  final query = await userCollection
+      .where("socialId", isEqualTo: socialId)
+      .get();
+
+  if (query.docs.isEmpty) {
+    await userCollection.add(userData);
+  } else {
+    await userCollection.doc(query.docs.first.id).update(userData);
   }
+}
 
-  Future<void> saveDetailsOnDB(
-    String socialId,
-    Map<String, dynamic> userData,
-  
-  ) async {
-    var _firebaseFirestore;
-    final CollectionReference userCollection = _firebaseFirestore.collection(
-      "users",
-    );
-
-    final query = await userCollection
-        .where("socialId", isEqualTo: socialId)
-        .get();
-
-    if (query.docs.isEmpty) {
-      await userCollection.add(userData);
-    } else {
-      await userCollection.doc(query.docs.first.id).update(userData);
-    }
-  }
-
-  _navigateToLogin(context) {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => BottemBar()),
-      (route) {
-        return false;
-      },
-    );
-  }
+_navigateToLogin(context) {
+  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => BottemBar()),
+    (route) {
+      return false;
+    },
+  );
+}
