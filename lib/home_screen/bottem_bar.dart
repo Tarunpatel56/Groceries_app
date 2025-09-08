@@ -3,6 +3,7 @@ import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:groceries/home_screen/category_page.dart';
 import 'package:groceries/home_screen/home_screen.dart';
+import 'package:groceries/home_screen/more.dart';
 import 'package:groceries/home_screen/my_bag.dart';
 
 
@@ -19,6 +20,7 @@ class _BottemBarState extends State<BottemBar> {
     HomeScreen(),
     CategoryPage(),
     MyBag(),
+    More(),
    ];
 
   @override
@@ -43,12 +45,9 @@ class _BottemBarState extends State<BottemBar> {
         ),
         CurvedNavigationBarItem(
           child: Icon(Icons.newspaper),
-          label: 'Feed',
+          label: 'more',
         ),
-        CurvedNavigationBarItem(
-          child: Icon(Icons.perm_identity),
-          label: 'Personal',
-        ),
+      
       ],
       onTap: (index) {
           setState(() {

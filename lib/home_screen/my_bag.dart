@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:groceries/model_sreen/Bag_model.dart';
+import 'package:groceries/model_sreen/timemodel.dart';
+
+import '../model_sreen/timemodel.dart';
 
 class MyBag extends StatefulWidget {
   const MyBag({super.key});
@@ -12,22 +15,17 @@ class MyBag extends StatefulWidget {
 class _MyBagState extends State<MyBag> {
   // ignore: non_constant_identifier_names
 
-  int quantity = 0;
-  void increaseQuantity() {
+  void increaseQuantity(Bagmodel data) {
     setState(() {
-      quantity++;
+      data.qut++;
     });
   }
 
-  void decreaseQuantity() {
+  void decreaseQuantity(Bagmodel data) {
+    if (data.qut <= 0) return;
+
     setState(() {
-      bool qunatity(int value) {
-        if (quantity-- <= 0) {
-          return true;
-        } else {
-          return false;
-        }
-      }
+      data.qut--;
     });
   }
 
@@ -59,6 +57,8 @@ class _MyBagState extends State<MyBag> {
         child: Column(
           children: [
             Text("Products"),
+
+          
             ListView.separated(
               itemBuilder: (context, index) {
                 return _userbaglist(UserBagList[index]);
@@ -70,7 +70,34 @@ class _MyBagState extends State<MyBag> {
               physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
             ),
-              ElevatedButton(onPressed: (){}, child:Text("Add More Product") )
+            ElevatedButton(onPressed: () {}, child: Text("Add More Product")),
+
+            Text(
+              "Expected Date & Time",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+
+            SizedBox(height: 8),
+            DropdownButtonFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Select Date",
+              ),
+              items: [
+                DropdownMenuItem(value: "Today", child: Text("Today")),
+                DropdownMenuItem(value: "Tomorrow", child: Text("Tomorrow")),
+              ],
+              onChanged: (val) {},
+            ),
+           
+            SizedBox(height: 10),
+            Row(children: [
+              Text("Delivery Location"),
+              Spacer(),
+              TextButton(onPressed: (){}, child: Text("Change"))
+            ],)
+
+
           ],
         ),
       ),
@@ -103,15 +130,15 @@ class _MyBagState extends State<MyBag> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text("QUT 1", style: TextStyle(fontSize: 20)),
+                      Text("QUT", style: TextStyle(fontSize: 20)),
                       IconButton(
                         onPressed: () {
-                          decreaseQuantity();
+                          decreaseQuantity(data);
                         },
                         icon: Icon(Icons.remove, color: Colors.red),
                       ),
                       Text(
-                        '$quantity',
+                        '${data.qut}',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -119,7 +146,7 @@ class _MyBagState extends State<MyBag> {
                       ),
                       IconButton(
                         onPressed: () {
-                          increaseQuantity();
+                          increaseQuantity(data);
                         },
                         icon: Icon(Icons.add, color: Colors.green),
                       ),
@@ -133,4 +160,7 @@ class _MyBagState extends State<MyBag> {
       ),
     );
   }
+  
 }
+
+

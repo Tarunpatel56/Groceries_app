@@ -1,39 +1,40 @@
 class Bagmodel {
-    Bagmodel({
-        required this.image,
-        required this.title,
-        required this.discount,
-        required this.price,
-    });
+  Bagmodel({
+    required this.image,
+    required this.title,
+    required this.discount,
+    required this.price,
+  });
 
-    final String? image;
-    final String? title;
-    final String? discount;
-    final String? price;
+  final String? image;
+  final String? title;
+  final String? discount;
+  final String? price;
+  int qut = 0;
 
-    factory Bagmodel.fromJson(Map<String, dynamic> json){ 
-        return Bagmodel(
-            image: json["image"],
-            title: json["title"],
-            discount: json["discount"],
-            price: json["price"],
-        );
-    }
-
+  factory Bagmodel.fromJson(Map<String, dynamic> json) {
+    return Bagmodel(
+      image: json["image"],
+      title: json["title"],
+      discount: json["discount"],
+      price: json["price"],
+    );
+  }
 }
- List userBag = [
+
+List userBag = [
   {
     "image": "assets/Rectangle1.png",
     "title": "Rice Bag 10kg",
     "discount": "10%",
-    "price": "₹550"
+    "price": "₹550",
   },
   {
     "image": "assets/Rectangle2.png",
     "title": "Wheat Flour 5kg",
     "discount": "5%",
-    "price": "₹220"
-   },
+    "price": "₹220",
+  },
   // {
   //   "image": "https://img.freepik.com/free-photo/sugar-bag.jpg",
   //   "title": "Sugar Bag 5kg",
