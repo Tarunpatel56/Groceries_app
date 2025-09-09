@@ -12,7 +12,20 @@
           "package_name": "com.example.groceries"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "159707000564-u4c8ov1t6bftmolgv1u7bm8iulfldqbb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.groceries",
+            "certificate_hash": "3d2bee3430b8c3f9cc27cc7392c608094dc5d5c4"
+          }
+        },
+        {
+          "client_id": "159707000564-8bucu9q51s2j5qlmg5jm5oc00f3uf466.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDspPHy58LGT_of6IlrpmMG1zbfLXR01ic"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159707000564-8bucu9q51s2j5qlmg5jm5oc00f3uf466.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "159707000564-etv5dhmjke3ht6jiu3fa5e95qtpkkri2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.groceries"
+              }
+            }
+          ]
         }
       }
     }

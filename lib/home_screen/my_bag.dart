@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:groceries/Product/product_detail.dart';
 import 'package:groceries/model_sreen/Bag_model.dart';
 import 'package:groceries/model_sreen/timemodel.dart';
 
@@ -58,10 +59,17 @@ class _MyBagState extends State<MyBag> {
           children: [
             Text("Products"),
 
-          
             ListView.separated(
               itemBuilder: (context, index) {
-                return _userbaglist(UserBagList[index]);
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProductDetail()),
+                    );
+                  },
+                  child: _userbaglist(UserBagList[index]),
+                );
               },
               separatorBuilder: (context, index) => SizedBox(),
 
@@ -89,15 +97,15 @@ class _MyBagState extends State<MyBag> {
               ],
               onChanged: (val) {},
             ),
-           
+
             SizedBox(height: 10),
-            Row(children: [
-              Text("Delivery Location"),
-              Spacer(),
-              TextButton(onPressed: (){}, child: Text("Change"))
-            ],)
-
-
+            Row(
+              children: [
+                Text("Delivery Location"),
+                Spacer(),
+                TextButton(onPressed: () {}, child: Text("Change")),
+              ],
+            ),
           ],
         ),
       ),
@@ -160,7 +168,4 @@ class _MyBagState extends State<MyBag> {
       ),
     );
   }
-  
 }
-
-

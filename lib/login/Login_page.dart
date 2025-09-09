@@ -220,7 +220,7 @@ googleLogin(context) async {
 
   await signIn.initialize(
     serverClientId:
-        "391545280397-tmb5lqeah6edkvo64llhg2m7pbpcu3ub.apps.googleusercontent.com",
+        "159707000564-u4c8ov1t6bftmolgv1u7bm8iulfldqbb.apps.googleusercontent.com",
   );
   final GoogleSignInAccount? user = await signIn.authenticate(
     scopeHint: scopes,
@@ -249,7 +249,13 @@ googleLogin(context) async {
     }),
   );
 
-  _navigateToLogin(context);
+Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => BottemBar()),
+    (route) {
+      return false;
+    },
+  );
 }
 
 Future<void> saveDetailsOnDB(
