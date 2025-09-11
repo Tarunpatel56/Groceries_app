@@ -214,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
 googleLogin(context) async {
   const List<String> scopes = <String>[
     'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
+    // 'https://www.googleapis.com/auth/contacts.readonly',
   ];
   final GoogleSignIn signIn = GoogleSignIn.instance;
 

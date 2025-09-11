@@ -1,6 +1,6 @@
-
-
 import 'package:flutter/material.dart';
+
+import '../profile/edit_profile.dart';
 
 class More extends StatefulWidget {
   const More({super.key});
@@ -18,92 +18,115 @@ class _MoreState extends State<More> {
         child: Column(
           children: [
             ListTile(
-              leading: CircleAvatar(maxRadius: 30,
-                backgroundImage: NetworkImage("https://picsum.photos/200",),
+              leading: CircleAvatar(
+                maxRadius: 30,
+                backgroundImage: NetworkImage("https://picsum.photos/200"),
               ),
-              title: Text("Shafikul Islam",style: TextStyle(fontSize: 25),),
-        
+              title: Text("Shafikul Islam", style: TextStyle(fontSize: 25)),
+
               subtitle: Text("01XXXXXXXXXXXX"),
             ),
-            SizedBox(height: 30,),
-            Row(
-              children: [
-                Icon(Icons.edit,size: 35,color: Colors.blue,),
-                SizedBox(width: 20),
-                Text("Edit Profile",style: TextStyle(fontSize: 25),),
-              ],
-            ),    SizedBox(height: 20,),
+            SizedBox(height: 30),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditProfile()),
+                );
+              },
+              child: Row(
+                children: [
+                  Icon(Icons.edit, size: 35, color: Colors.blue),
+                  SizedBox(width: 20),
+                  Text("Edit Profile", style: TextStyle(fontSize: 25)),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
             Divider(),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Row(
               children: [
-                Icon(Icons.location_on_outlined,size: 35,),
+                Icon(Icons.location_on_outlined, size: 35),
                 SizedBox(width: 20),
-                Text("My Address",style: TextStyle(fontSize: 25),),
+                Text("My Address", style: TextStyle(fontSize: 25)),
               ],
-            ),    SizedBox(height: 20,),
+            ),
+            SizedBox(height: 20),
             Divider(),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Row(
               children: [
-                Icon(Icons.shopping_basket_outlined,size: 35,),
+                Icon(Icons.shopping_basket_outlined, size: 35),
                 SizedBox(width: 20),
-                Text("My Orders",style: TextStyle(fontSize: 25),),
+                Text("My Orders", style: TextStyle(fontSize: 25)),
               ],
-            ),    SizedBox(height: 20,),
+            ),
+            SizedBox(height: 20),
             Divider(),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Row(
               children: [
-                Icon(Icons.shopping_bag_outlined,size: 35,),
+                Icon(Icons.shopping_bag_outlined, size: 35),
                 SizedBox(width: 20),
-                Text("My Wishlist",style: TextStyle(fontSize: 25),),
+                Text("My Wishlist", style: TextStyle(fontSize: 25)),
               ],
-            ),    SizedBox(height: 20,),
+            ),
+            SizedBox(height: 20),
             Divider(),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Row(
               children: [
-                Icon(Icons.chat_bubble_outline,size: 35,color: Colors.green,),
+                Icon(Icons.chat_bubble_outline, size: 35, color: Colors.green),
                 SizedBox(width: 20),
-                Text("Chat with us",style: TextStyle(fontSize: 25),),
+                Text("Chat with us", style: TextStyle(fontSize: 25)),
               ],
-            ),    SizedBox(height: 20,),
+            ),
+            SizedBox(height: 20),
             Divider(),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Row(
               children: [
-                Icon(Icons.call,size: 35,color: Colors.red,),
+                Icon(Icons.call, size: 35, color: Colors.red),
                 SizedBox(width: 20),
-                Text("Talk to our Support",style: TextStyle(fontSize: 25),),
+                Text("Talk to our Support", style: TextStyle(fontSize: 25)),
               ],
-            ),    SizedBox(height: 20,),
+            ),
+            SizedBox(height: 20),
             Divider(),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Row(
               children: [
-                Icon(Icons.mail_outline,size: 35,),
+                Icon(Icons.mail_outline, size: 35),
                 SizedBox(width: 20),
-                Text("Mail to us",style: TextStyle(fontSize: 25),),
+                Text("Mail to us", style: TextStyle(fontSize: 25)),
               ],
-            ),    SizedBox(height: 20,),
+            ),
+            SizedBox(height: 20),
             Divider(),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Row(
               children: [
-                Icon(Icons.facebook,size: 35,color: Colors.blue,),
+                Icon(Icons.facebook, size: 35, color: Colors.blue),
                 SizedBox(width: 20),
-                Text("Message to facebook page",style: TextStyle(fontSize: 25),),
+                Text(
+                  "Message to facebook page",
+                  style: TextStyle(fontSize: 25),
+                ),
               ],
-            ), 
-            SizedBox(height: 20,),
+            ),
+            SizedBox(height: 20),
             Divider(),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Row(
               children: [
-                Icon(Icons.power_settings_new_outlined,size: 35,color: Colors.red,),
+                Icon(
+                  Icons.power_settings_new_outlined,
+                  size: 35,
+                  color: Colors.red,
+                ),
                 SizedBox(width: 20),
-                Text("Log out",style: TextStyle(fontSize: 25),),
+                Text("Log out", style: TextStyle(fontSize: 25)),
               ],
             ),
           ],

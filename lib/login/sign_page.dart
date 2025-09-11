@@ -60,7 +60,7 @@ class _SignPageState extends State<SignPage> {
               decoration: InputDecoration(border: OutlineInputBorder(),
               hint: Text("example@gmail.com")),
             ),
-            SizedBox(height: MediaQuery.sizeOf(context).height*0.1,),
+            SizedBox(height: MediaQuery.sizeOf(context).height*0.1 ,),
             SizedBox(width:  MediaQuery.sizeOf(context).width*7, 
             height: 50,
               child: ElevatedButton(onPressed: (){},style:ElevatedButton.styleFrom(backgroundColor: Colors.green, shape:BeveledRectangleBorder(borderRadius: BorderRadiusGeometry.circular(5))) , child:Text("Sign up",style: TextStyle(fontSize: 15,color: Colors.white),)))
