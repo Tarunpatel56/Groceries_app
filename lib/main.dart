@@ -4,6 +4,7 @@ import 'package:groceries/firebase_options.dart';
 import 'package:groceries/home_screen/bottem_bar.dart';
 import 'package:groceries/login/Login_page.dart';
 import 'package:groceries/login/sign_page.dart';
+import 'package:sizer/sizer.dart';
 
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +18,11 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+
+  Widget build(BuildContext context) 
+  {
+    return Sizer(  builder: (context, orientation, screenType)
+      return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -26,7 +30,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       // home: MyBagScreen(),
-      home: LoginPage(),
+      home: SelidingScreen(),
+              ),
     );
   }
 }
